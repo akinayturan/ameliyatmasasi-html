@@ -1,0 +1,7 @@
+.DS_Store
+backup_*/
+private/
+node_modules/
+*.zip
+verification/
+__pycache__/
