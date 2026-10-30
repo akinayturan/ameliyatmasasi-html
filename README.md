@@ -50,3 +50,21 @@ Canlı geçiş sırasında önce mevcut WordPress web kökünün ayrı bir kopya
 - Güncelliği doğrulanmamış eski “10 yıl” ifadesi ana sayfada kullanılmadı. Firma tanıtımında süre belirtilmedi. Eski sertifika görseli, güncel geçerlilik iddiası oluşturacak şekilde tasarıma eklenmedi; arşiv medya klasöründe korundu.
 - Teknik değerler ve iletişim bilgileri sağlanan yedekten aktarılmıştır; yeni ürün veya güncel sertifika bilgisi eklenmemiştir.
 - PHP tema/eklenti dosyaları, kullanıcı hesapları, veritabanı, özel sunucu dosyaları ve örnek tema görselleri yayın çıktısına taşınmadı. Orijinal yedeğe dokunulmadı.
+
+## GitHub Pages
+
+`main` dalına push yapıldığında `.github/workflows/pages.yml` bağlantıları ve JavaScript sözdizimini kontrol eder, ardından yalnızca `modern-site/` klasörünü GitHub Pages'e yayımlar. SQL, yedekler, üretim kaynakları ve README yayın paketine girmez. GitHub Actions yayını için özel alan adı ayrıca deponun **Settings → Pages** ayarında `ameliyatmasasi.com` olarak tanımlanır; `CNAME` dosyası tek başına bu ayarın yerini tutmaz.
+
+DNS kayıtları:
+
+| Tür | Ad | Değer |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | akinayturan.github.io |
+
+TTL: Auto veya 300 saniye. Cloudflare kullanılıyorsa ilk kurulumda web kayıtları **DNS only** (gri bulut) olmalıdır. Aynı `@` ve `www` adlarındaki eski web hedeflerini değiştirin; eski sunucuya giden AAAA kayıtları varsa kaldırın veya GitHub'ın IPv6 değerleriyle güncelleyin. MX, SPF, DKIM ve diğer e-posta kayıtlarını koruyun. DNS doğrulaması ve sertifika oluşumu tamamlandığında Pages ayarından **Enforce HTTPS** açılabilir. DNS değişikliği bu commit tarafından yapılmaz.
+
+Kaynak: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
